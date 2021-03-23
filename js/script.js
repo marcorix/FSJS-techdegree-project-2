@@ -1,5 +1,6 @@
 // Number of student displayed
 const perPage = 9;
+var studentList = document.querySelector(".student-list");
 
 /*
 Create the `showPage` function
@@ -10,9 +11,9 @@ function showPage(list, page) {
   // Create two variables to store the start index and the end index of the list items
   const startIndex = page * perPage - perPage;
   const endIndex = page * perPage;
-  console.log(list);
+
   // Select the UL element and remove the content.
-  let studentList = document.querySelector(".student-list");
+
   studentList.innerHTML = "";
 
   // get the info for each student and insert into the ul
@@ -61,14 +62,13 @@ function addPagination(list) {
   }
 
   // Set the first button as "active"
-  const buttonActive = linkList.firstElementChild.firstElementChild;
-  buttonActive.className = "active";
 
-  // buttons handler
+  const firstButton = document.querySelectorAll("button")[0];
+  firstButton.className = "active";
+
+  // pagination buttons handler
   linkList.addEventListener("click", (e) => {
     if (e.target.tagName === "BUTTON") {
-      const buttons = document.querySelectorAll(".link-list li");
-
       // Remove the active class from any other pagination button.
       document.querySelector(".active").className = "";
 
@@ -112,13 +112,20 @@ input.addEventListener("keyup", () => {
     const fName = student.name.first.toLowerCase();
     const lName = student.name.last.toLowerCase();
 
+    // check if the charachters in the input are included in the name.
     if (fName.includes(inputValue) || lName.includes(inputValue)) {
       newList.push(student);
     }
   });
-
   showPage(newList, 1);
   addPagination(newList);
+
+  // Ceck if the array is empty or not
+  if (newList.length < 1) {
+    studentList.innerHTML = `
+    <div> <p>No Matches Found </p></div>
+    `;
+  }
 });
 
 // the button
@@ -134,7 +141,7 @@ searchButton.addEventListener("click", () => {
       newList.push(student);
     }
   });
-  console.log(newList);
+
   showPage(newList, 1);
   addPagination(newList);
 });

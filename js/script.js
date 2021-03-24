@@ -128,7 +128,7 @@ input.addEventListener("keyup", () => {
   }
 });
 
-// the button
+// the Search Button
 searchButton.addEventListener("click", () => {
   const newList = [];
 
@@ -137,11 +137,18 @@ searchButton.addEventListener("click", () => {
     const fName = student.name.first.toLowerCase();
     const lName = student.name.last.toLowerCase();
 
+    // check if the charachters in the input are included in the name.
     if (fName.includes(inputValue) || lName.includes(inputValue)) {
       newList.push(student);
     }
   });
-
   showPage(newList, 1);
   addPagination(newList);
+
+  // Ceck if the array is empty or not
+  if (newList.length < 1) {
+    studentList.innerHTML = `
+    <div> <p>No Matches Found </p></div>
+    `;
+  }
 });

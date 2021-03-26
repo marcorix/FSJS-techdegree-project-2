@@ -133,11 +133,10 @@ searchButton.addEventListener('click', () => {
 
   data.forEach((student) => {
     const inputValue = input.value.toLocaleLowerCase();
-    const fName = student.name.first.toLowerCase();
-    const lName = student.name.last.toLowerCase();
+    const studentName = `${student.name.first} ${student.name.last}`;
 
     // check if the charachters in the input are included in the name.
-    if (fName.includes(inputValue) || lName.includes(inputValue)) {
+    if (studentName.toLowerCase().includes(inputValue)) {
       newList.push(student);
     }
   });

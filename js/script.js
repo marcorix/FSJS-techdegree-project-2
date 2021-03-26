@@ -1,6 +1,6 @@
 // Number of student displayed
 const perPage = 9;
-var studentList = document.querySelector(".student-list");
+var studentList = document.querySelector('.student-list');
 
 /*
 Create the `showPage` function
@@ -14,14 +14,14 @@ function showPage(list, page) {
 
   // Select the UL element and remove the content.
 
-  studentList.innerHTML = "";
+  studentList.innerHTML = '';
 
   // get the info for each student and insert into the ul
   for (let i = 0; i < list.length; i++) {
     const student = list[i];
     if (i >= startIndex && i < endIndex) {
       studentList.insertAdjacentHTML(
-        "beforeend",
+        'beforeend',
         `
       <li class="student-item cf">
         <div class="student-details">
@@ -48,13 +48,13 @@ function addPagination(list) {
   const numOfPages = Math.ceil(list.length / perPage);
 
   // select the ul and empty it
-  const linkList = document.querySelector(".link-list");
-  linkList.innerHTML = "";
+  const linkList = document.querySelector('.link-list');
+  linkList.innerHTML = '';
 
   // add the buttons to the ul
   for (let i = 1; i <= numOfPages; i++) {
     linkList.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       `<li>
       <button type="button">${i}</button>
       </li>`
@@ -63,17 +63,17 @@ function addPagination(list) {
 
   // Set the first button as "active"
 
-  const firstButton = document.querySelectorAll("button")[0];
-  firstButton.className = "active";
+  const firstButton = document.querySelectorAll('button')[0];
+  firstButton.className = 'active';
 
   // pagination buttons handler
-  linkList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
+  linkList.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
       // Remove the active class from any other pagination button.
-      document.querySelector(".active").className = "";
+      document.querySelector('.active').className = '';
 
       // Add the active class to the pagination button.
-      e.target.className = "active";
+      e.target.className = 'active';
 
       // Get the page number and call showPage()
       const pageNumber = e.target.textContent;
@@ -87,9 +87,9 @@ showPage(data, 1);
 addPagination(data);
 
 // Add a Search Component
-const header = document.querySelector(".header");
+const header = document.querySelector('.header');
 header.insertAdjacentHTML(
-  "beforeend",
+  'beforeend',
   `
 <label for="search" class="student-search">
   <span>Search by name</span>
@@ -100,20 +100,19 @@ header.insertAdjacentHTML(
 );
 
 // Add Functionality to the Search Component
-const searchButton = document.querySelector(".student-search button");
-const input = document.getElementById("search");
+const searchButton = document.querySelector('.student-search button');
+const input = document.getElementById('search');
 
 // the input
-input.addEventListener("keyup", () => {
+input.addEventListener('keyup', () => {
   const newList = [];
 
   data.forEach((student) => {
     const inputValue = input.value.toLocaleLowerCase();
-    const fName = student.name.first.toLowerCase();
-    const lName = student.name.last.toLowerCase();
+    const studentName = `${student.name.first} ${student.name.last}`;
 
     // check if the charachters in the input are included in the name.
-    if (fName.includes(inputValue) || lName.includes(inputValue)) {
+    if (studentName.toLowerCase().includes(inputValue)) {
       newList.push(student);
     }
   });
@@ -129,7 +128,7 @@ input.addEventListener("keyup", () => {
 });
 
 // the Search Button
-searchButton.addEventListener("click", () => {
+searchButton.addEventListener('click', () => {
   const newList = [];
 
   data.forEach((student) => {
